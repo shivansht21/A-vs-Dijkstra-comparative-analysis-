@@ -1,0 +1,12 @@
+explore = PriorityQueue
+explore.push((problem.getStartState(), [], 0), 0) // here the priority for the initial node is 0.
+seen = {}  // The seen set just keeps a list of all states that we have seen before so that we dont have to re-explore them
+while (explore is not empty):
+  node, path, cost = explore.pop() //this takes out a node/state
+  if (node is the goal):
+      return path
+  if not  node in seen:
+      for child, direction, stepcost in problem.getSuccessors(node):
+          explore.push((child, path + [direction], stepcost + cost), stepcost + cost + heuristic(child)) // the heursitic is added here as a part of the priority  
+      seen.add(node)
+return no path found // if we get here then that means that there was no path 
